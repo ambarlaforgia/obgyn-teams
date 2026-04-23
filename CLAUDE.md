@@ -1,136 +1,148 @@
-# CLAUDE.MD -- Academic Project Development with Claude Code
+# CLAUDE.MD — OB-GYN Teams: Gender Mix and Team Performance R&R
 
-<!-- HOW TO USE: Replace [BRACKETED PLACEHOLDERS] with your project info.
-     Customize Beamer environments and CSS classes for your theme.
-     Keep this file under ~150 lines — Claude loads it every session.
-     See the guide at docs/workflow-guide.html for full documentation. -->
-
-**Project:** [YOUR PROJECT NAME]
-**Institution:** [YOUR INSTITUTION]
-**Branch:** main
+**Project:** Management Science R&R — "Gender Mix and Team Performance: Evidence from Obstetrics"
+**Authors:** Ambar La Forgia & Manasvini Singh
+**Status:** Revise & Resubmit
 
 ---
 
-## Core Principles
+## Core Workflow
 
-- **Plan first** -- enter plan mode before non-trivial tasks; save plans to `quality_reports/plans/`
-- **Verify after** -- compile/render and confirm output at the end of every task
-- **Single source of truth** -- Beamer `.tex` is authoritative; Quarto `.qmd` derives from it
-- **Quality gates** -- nothing ships below 80/100
-- **[LEARN] tags** -- when corrected, save `[LEARN:category] wrong → right` to MEMORY.md
+- **Language:** Stata (`.do` files). Do NOT write R code unless explicitly asked.
+- **Paper:** LaTeX on Overleaf, synced via Dropbox
+- **Estimation:** `reghdfe` for fixed effects linear probability models
+- **Data:** Florida AHCA inpatient discharge records 2006-2018
 
 ---
 
-## Folder Structure
+## Critical File Paths
 
 ```
-[YOUR-PROJECT]/
-├── CLAUDE.MD                    # This file
-├── .claude/                     # Rules, skills, agents, hooks
-├── Bibliography_base.bib        # Centralized bibliography
-├── Figures/                     # Figures and images
-├── Preambles/header.tex         # LaTeX headers
-├── Slides/                      # Beamer .tex files
-├── Quarto/                      # RevealJS .qmd files + theme
-├── docs/                        # GitHub Pages (auto-generated)
-├── scripts/                     # Utility scripts + R code
-├── quality_reports/             # Plans, session logs, merge reports
-├── explorations/                # Research sandbox (see rules)
-├── templates/                   # Session log, quality report templates
-└── master_supporting_docs/      # Papers and existing slides
+CODE (ONLY work here):
+/Users/ambarlaforgia/AL2 Research Dropbox/Ambar La Forgia/Health_equity/_analysis/revision/_code/
+
+OVERLEAF (paper LaTeX):
+/Users/ambarlaforgia/AL2 Research Dropbox/Ambar La Forgia/Apps/Overleaf/[PAPER_REVISION] Gender Mix and Team Performance: Evidence from Obstetrics/
+
+DATA:
+/Users/ambarlaforgia/AL2 Research Dropbox/FL_data/inp_data/
+
+RESULTS:
+/Users/ambarlaforgia/AL2 Research Dropbox/Ambar La Forgia/Health_equity/_analysis/_results/
+
+REFEREE REPORTS:
+/Users/ambarlaforgia/obgyn-teams/master_supporting_docs/ManSci/referee_reports/
 ```
 
----
-
-## Commands
-
-```bash
-# LaTeX (3-pass, XeLaTeX only)
-cd Slides && TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-BIBINPUTS=..:$BIBINPUTS bibtex file
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-TEXINPUTS=../Preambles:$TEXINPUTS xelatex -interaction=nonstopmode file.tex
-
-# Deploy Quarto to GitHub Pages
-./scripts/sync_to_docs.sh LectureN
-
-# Quality score
-python scripts/quality_score.py Quarto/file.qmd
-```
+**WARNING:** Do NOT modify files outside the `revision/` code folder. Other folders contain legacy code.
 
 ---
 
-## Quality Thresholds
+## Code Execution Order
 
-| Score | Gate | Meaning |
-|-------|------|---------|
-| 80 | Commit | Good enough to save |
-| 90 | PR | Ready for deployment |
-| 95 | Excellence | Aspirational |
-
----
-
-## Skills Quick Reference
-
-| Command | What It Does |
-|---------|-------------|
-| `/compile-latex [file]` | 3-pass XeLaTeX + bibtex |
-| `/deploy [LectureN]` | Render Quarto + sync to docs/ |
-| `/extract-tikz [LectureN]` | TikZ → PDF → SVG |
-| `/proofread [file]` | Grammar/typo/overflow review |
-| `/visual-audit [file]` | Slide layout audit |
-| `/pedagogy-review [file]` | Narrative, notation, pacing review |
-| `/review-r [file]` | R code quality review |
-| `/qa-quarto [LectureN]` | Adversarial Quarto vs Beamer QA |
-| `/slide-excellence [file]` | Combined multi-agent review |
-| `/translate-to-quarto [file]` | Beamer → Quarto translation |
-| `/validate-bib` | Cross-reference citations |
-| `/devils-advocate` | Challenge slide design |
-| `/create-lecture` | Full lecture creation |
-| `/commit [msg]` | Stage, commit, PR, merge |
-| `/lit-review [topic]` | Literature search + synthesis |
-| `/research-ideation [topic]` | Research questions + strategies |
-| `/interview-me [topic]` | Interactive research interview |
-| `/review-paper [file]` | Manuscript review |
-| `/data-analysis [dataset]` | End-to-end R analysis |
-| `/learn [skill-name]` | Extract discovery into persistent skill |
-| `/context-status` | Show session health + context usage |
-| `/deep-audit` | Repository-wide consistency audit |
+1. `1_inpatient_readin_NEW.do` — Data cleaning, physician ID matching, gender/age imputation
+2. `2_inpatient_icdxwalk.do` — ICD-9/10 crosswalk
+3. `3_inpatient_variables.do` — Construct analysis variables (SMM, risk factors, teams)
+4. `4_inpatient_analysis.do` — Master file calling all analysis sub-files:
+   - `_locals.do` → global macros
+   - `4a_id_patientrisk.do` → predicted complication probability
+   - `4a_id_physicianteams.do` → endogenous team formation tests
+   - `4b_summary_stats.do` → summary statistics
+   - `4c_robustness.do` → robustness checks
+   - `4d_heterogeneity.do` → heterogeneity analyses
+   - `5a_how_csection.do` → C-section mechanism
+   - `5b_how_gender_effect.do` → gender mix effect holding prefs fixed
+   - `6a_why_prefmapping.do` → preference incorporation
+   - `6b_why_challenges.do` → team resilience
+   - `7_response_R1.do` → R1 revision analyses
 
 ---
 
-<!-- CUSTOMIZE: Replace the example entries below with your own
-     Beamer environments and Quarto CSS classes. These are examples
-     from the original project — delete them and add yours. -->
+## Key Variables
 
-## Beamer Custom Environments
+| Variable | Description |
+|----------|-------------|
+| `smm` / `MC` | Severe maternal morbidity (25-condition CDC definition) |
+| `lead_fem` / `doc_fem_atten` | Lead physician is female |
+| `samegender_assist` | Assisting physician same gender as Lead |
+| `csection` | C-section delivery |
+| `vaginal` | Vaginal delivery |
+| `solo` | Single-physician delivery (Lead = Assisting) |
+| `team` | Two-physician delivery |
 
-| Environment       | Effect        | Use Case       |
-|-------------------|---------------|----------------|
-| `[your-env]`      | [Description] | [When to use]  |
-
-<!-- Example entries (delete and replace with yours):
-| `keybox` | Gold background box | Key points |
-| `highlightbox` | Gold left-accent box | Highlights |
-| `definitionbox[Title]` | Blue-bordered titled box | Formal definitions |
--->
-
-## Quarto CSS Classes
-
-| Class              | Effect        | Use Case       |
-|--------------------|---------------|----------------|
-| `[.your-class]`    | [Description] | [When to use]  |
-
-<!-- Example entries (delete and replace with yours):
-| `.smaller` | 85% font | Dense content slides |
-| `.positive` | Green bold | Good annotations |
--->
+## Team Types
+- **MM** (M_L–M_A): Male Lead, Male Assist
+- **MF** (M_L–F_A): Male Lead, Female Assist
+- **FM** (F_L–M_A): Female Lead, Male Assist
+- **FF** (F_L–F_A): Female Lead, Female Assist
 
 ---
 
-## Current Project State
+## Revision Priorities (from referee reports)
 
-| Lecture | Beamer | Quarto | Key Content |
-|---------|--------|--------|-------------|
-| 1: [Topic] | `Lecture01_Topic.tex` | `Lecture1_Topic.qmd` | [Brief description] |
-| 2: [Topic] | `Lecture02_Topic.tex` | -- | [Brief description] |
+1. **Tighter FE as baseline**: hospital×year×quarter×DOW×shift (not just hospital×year + quarter)
+2. **Address reverse causality**: Show assisting physician assisted in delivery, not post-complication
+3. **4-category specification**: MM as leave-out group (replace samegender_assist coding)
+4. **Hospital-level clustering**: Replace lead-physician clustering
+5. **Scale back mechanisms**: Focus on establishing performance differences cleanly
+6. **Solo sample robustness**: Replicate physician FE in exogenous solo subsamples
+7. **Predict team vs solo model**: What drives team formation?
+8. **Monte Carlo shuffle test**: Permute lead/assist roles within cases
+9. **Streamline paper**: Single baseline spec, clear hierarchy of results
+
+---
+
+## Stata Conventions
+
+- Use `reghdfe` for all fixed effects regressions
+- Use `coefplot` for figure coefficient plots
+- Store estimates with `eststo <name>`
+- Cluster SEs at the **hospital** level (`$cluster = "vce(cluster faclnbr)"`) — per R2 / Abadie et al. (2023)
+- Use `$ff_leaveout = "mm fm mf"` for the main 4-category team spec (FF omitted)
+- Keep an `$main_int = "i.doc_fem_atten##i.samesex"` version only for margins/coefplot figures
+- Always include `cap drop` before `gen` / `predict` to handle re-runs safely
+- Globals are defined inline in `4_inpatient_analysis.do` — duplicate them at the top of standalone/referee do-files so they run on their own
+
+---
+
+## Table Generation Pattern (critical — two files per table)
+
+**Every table uses a two-file pattern**:
+
+1. **Stata writes ONLY the tabular** to `<name>.tex`
+   - Uses `file write` with `_char(36)` for literal `$` (e.g. `$\times$`, `$R^{2}$`) — Stata eats `$` in `file write` otherwise
+   - Output: `\begin{tabular}...\end{tabular}` only. No `\begin{table}`, caption, or notes.
+
+2. **Hand-edited wrapper `.tex`** in Overleaf contains `\begin{table}`, caption, label, and notes — uses `\input{path/<name>}` to pull in the Stata-generated tabular.
+
+3. **Main `.tex` document** does `\input{.../<name>}` (for paper) or `\input{.../<name>_wrapper}` (for response).
+
+### Paths
+
+**Paper tables** (Body.tex / Appendix.tex):
+- Stata output: `$overleaf_tables` = `.../[PAPER_REVISION] .../tables/generated/<name>.tex`
+- Wrappers: `.../tables/<name>.tex` (hand-edited)
+- Source do-files: `_code/code_tables/table_<name>.do`, called via `include` from main analysis files
+
+**Response tables** (response.tex):
+- Stata output: `$overleaf_response_tables` = `.../[PAPER_REVISION] .../response/referee_tables/<name>.tex`
+- Wrappers: `.../response/referee_tables/<name>_wrapper.tex` (hand-edited)
+- Source do-files: `_code/referee_only/<name>.do` (self-contained — each has its own path/globals block and loads data directly)
+
+### Response-doc table notes
+
+- Wrap notes in `\begin{singlespace}...\end{singlespace}` (response doc is double-spaced)
+- Use `\scriptsize` for smaller text
+- Use `\noindent` to left-align (not centered)
+
+---
+
+## Response Document Conventions
+
+- Main file: `.../response/response.tex`
+- Standalone (no biblatex, no xr-hyper) — references to main paper eqs/tables use plain text ("Equation 1 in the manuscript")
+- Referee comments: **plain text** (not italicized)
+- Response marker: `\textbf{\textcolor{blue}{Response XX: }}`
+- Placeholders: `\textcolor{red}{[PLACEHOLDER]}`
+- Citations: plain text (e.g. "Abadie et al. (2023)"), not `\citet{}`
+- Team-type macros `\PlainMM`, `\PlainMF`, `\PlainFM`, `\PlainFF` defined in preamble

@@ -1,0 +1,56 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2822
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 ArialMT;}
+{\colortbl;\red255\green255\blue255;\red26\green26\blue26;\red255\green255\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c13333\c13333\c13333;\cssrgb\c100000\c100000\c100000;}
+\margl1440\margr1440\vieww21260\viewh17260\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs20 \cf2 \cb3 \expnd0\expndtw0\kerning0
+\outl0\strokewidth0 \strokec2 Reviewer: 2\
+\
+Recommendation:\
+\
+Comments:\
+Thank you very much for the opportunity to read this paper about\'a0gender\'a0diversity and team performance. The paper has an appealing empirical setting: \'a0teams of OBGYN physicians collaborating on a childbirth. The setting is appealing for multiple reasons. First, the teams consistent of only two members: a \'93lead\'94 OBGYN physician and an \'93assisting\'94 OBGYN physician. \'a0This means that team size is fixed, and each team has a clear hierarchy. \'a0Second, it is plausible that team formation is quasi-random, because childbirth sometimes occurs suddenly, and the lead OBGYN physician may be constrained in whom they can select to be their assistant by variation in OBGYN scheduling. Third, team performance is relatively easy to measure using maternal complications.\
+\
+The authors leverage these aspects of the setting to produce a key finding: teams with two male OBGYN physicians perform the worst, while teams with two female OBGYN physicians perform the best. \'a0Mixed\'a0gender\'a0teams perform somewhere in the middle.\
+\
+I think the paper has potential to provide an important contribution to the literature on\'a0gender\'a0dynamics and team performance. \'a0This is an important setting, the design and results are interesting, and the authors have carefully anticipated many issues. With these positives in mind, I have concerns. Where possible, I try to provide ideas on how the authors could address my concerns.\
+\
+1. The paper seems to envision a situation where the delivery is complicated due to issues with the fetus, so another OBGYN is called. \'a0Then, later on, after delivery is over, the mother may or may not develop complications (i.e. renal failure, sepsis, etc). \'a0My main concern with the paper is that the timing of these events might not be so neat and orderly. \'a0\
+\
+I am concerned that the maternal complications might **cause** the lead OBGYN to request the help of another OBGYN. \'a0In other words, there might be a kind of reverse causality or collider bias, whereby maternal complications drive formation of the team, as well as its\'a0gender\'a0mix. \'a0\
+\
+I am concerned that maternal complications might drive the\'a0gender\'a0mix of the team in part because the male doctors in the data have about 10 more years of experience than the female doctors and about 20% more births per year (Table A.1). \'a0This experience disparity, combined with the possibility that maternal complications drive team formation, cause me to worry about the following alternative story:\
+\
+Higher experience (i.e. male) OBGYNs have a higher maternal complication threshold before they feel the need to ask for help from another OBGYN (e.g. if a mother is having mild complications, an OBGYN with more experience might be less likely to ask for assistance from another OBGYN). \'a0This could explain why OBGYN teams that have a man on them have higher maternal complication rates in Figure IIa. \'a0And if a high-experience (i.e. male) OBGYN faces serious maternal complications, that high-experience OBGYN will probably try hard to get assistance from another high-experience (i.e. male) OBGYN. This could explain why maternal complications are the highest for the male-male teams in Figure IIa \'96 the causality might run the opposite way, whereby, in the team sample, the mothers with the worst complications in the are most likely to be served by male-male teams (i.e. the most experienced teams), and the mothers with the least complications are most likely to be served by female-female teams (i.e. the least experienced teams).\
+\
+There are several things that the authors could do to rule out this alternative story.\
+\
+a. Control for physician age and experience more effectively.\
+\
+Right now, in the paper controls for quintiles of physician age and cumulative births for both the lead OBGYN (Z_j in Eq 1) and the assisting OBGYN (T_k in Eq 1). It would be helpful to include an interaction of the age of the lead OBGYN and the age of the assisting OBGYN, as well as the interaction between the experience of the lead OBGYN and the assisting OBGYN. \'a0It is fine with me if these interactions use simple continuous measures of age and experience.\
+\
+b. Provide some descriptive statistics or regression analysis about \'93selection into a team.\'94\
+\
+It would be helpful to know whether male OBGYNs are less likely than female OBGYNs to ask for a teammate. \'a0The authors could show this in descriptive statistics and regression analysis. \'a0\
+\
+It would also be helpful to know if male doctors do have a higher maternal complication threshold at which they ask for help. \'a0The authors could examine this by estimating a regression where the DV = 1 if the birth requires a team of OBGYNs and the explanatory variables include the presence or number of maternal complications and their interaction with whether or not the lead OBGYN is male.\
+\
+If my story is unimportant, then we should see male and female physicians asking for a teammate at similar rates, and we should see a null interaction between presence or number of maternal complications and the\'a0gender\'a0of the lead physician.\
+\
+2. \'a0One reason I worry about my alternative explanation is that it was not clear to me why male-male teams should perform worse than male-female or female-male teams. \'a0At first, thought that maybe the issue is a lack of homophily/empathy on the part of male doctors for their female patients, but the paper asserts in Figure 1 that men and women have similar skills in single-OBGYN births, so it does not seem that men are worse OBGYNs than women. \'a0If the underlying mechanism comes from\'a0gender\'a0role dynamics and men\'92s issues with female leadership, it was not clear to me why the male-male teams perform so poorly.\
+\
+3. The paper claims that \'93among mixed\'a0gender\'a0team, F_LEAD-M_ASSIST perform worse than M_LEAD-F_ASSIST.\'94 \'a0It was not clear to me that the data supported this \'a0conclusion. \'a0While page 18 provides p values that show that each of these teams underperform female-only teams, page 18 does not provide a formal comparison of \'a0 F_LEAD-M_ASSIST to M_LEAD-F_ASSIST, and their confidence intervals seem to overlap considerably in Figure II. \'a0I know that we seem to see differences in Figure II panel c, but this analysis includes team fixed effects and might drop much of the data.\
+\
+Meanwhile, the coding of the \'93same\'a0gender\'a0assisting variable\'94 made it difficult for me to interpret the regression tables, which raised my concern about the previous issue. This variable pools two asymmetric comparison (female-led teams with female vs male assistants and male-led teams with male vs female assistant) while mechanically tying team composition to Lead\'a0gender.\
+\
+I think it would simplify the interpretation if the authors simply use \'93female assisting\'94, rather than conditioning this variable on the\'a0gender\'a0of the lead doctor. \'a0The authors could also provide p value comparisons in Figure II, like they do in later heterogeneity tests.\
+\
+4. \'a0The authors place a lot of interpretive weight on the\'a0gender\'a0of the \'93lead\'94 physician and the \'93assisting\'94 physician, but, as they note, it is possible that there is a lot of noise in the assignment of physicians to these roles. It might help their conclusions if they compared their results to Monte Carlo simulations that shuffled, within cases, the identities of the lead and assisting physicians. \'a0If the results from the actual data are different from these shuffle tests, I think that it would help to strengthen the conclusions related to female versus male leadership in mixed\'a0gender\'a0teams.\
+\
+5. The authors cluster standard errors by lead physician. \'a0If I approach the clustering choice like the influential paper by Abadie et al. (2023) in QJE, I think I would prefer a hospital cluster, since the randomization seems to happen at the hospital level (i.e. the decision to add a teammate and the identity of the teammate will be determined by hospital protocols and staffing pool).\
+\
+Thank you for the opportunity to read this work, and I wish you all the best with your revisions.\
+}
